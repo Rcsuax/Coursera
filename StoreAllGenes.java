@@ -109,8 +109,9 @@ public class StoreAllGenes {
         System.out.println("string s: " + s);
         StorageResource str = StoreAll(s);
         System.out.println("testing return value: " + str.size());
-        
         System.out.println("end");
+        System.out.println("calling printGenes");
+        printGenes(str);
     }
     public static void testFinder(String dna) {
         
@@ -130,6 +131,22 @@ public class StoreAllGenes {
             System.out.println("CGCount " + CGCount + " Length: " + dna.length() + " Ratio: " + (float)CGCount/dlen);
         }
         return (float)CGCount/dlen;
+    }
+    public static void printGenes(StorageResource sr) {
+        int GT60 = 0;
+        int CGratioGT = 0;
+        for (String item : sr.data()){
+            if(item.length() > 60){
+                System.out.println("Length: " +item);
+                GT60++;
+            }
+            if (cgRatio(item) > 0.35){
+                System.out.println("CGRATIO: "+ item);
+                CGratioGT++;
+            }
+        }
+        System.out.println("Number of strings with length greater than 60: " + GT60);
+        System.out.println("Number of strings with CGRatio greater than 0.35: "+ CGratioGT);
     }
     public static void main(String[] args) {
         
